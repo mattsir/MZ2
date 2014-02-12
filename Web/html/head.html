@@ -1,0 +1,71 @@
+﻿<!--  <script type="text/javascript">
+      function getQueryStringRegExp(name) {
+          var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");
+          if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));
+          return "";
+      }
+  </script>
+  <script type="text/javascript">
+      window.onload = function()
+      {
+          var id = getQueryStringRegExp("id");
+          //alert(id);
+          switch (id) {
+              case "3":
+                  document.getElementById("menutitle").innerHTML = "<img src=\"/images/icon_life.png\"  border=\"0\" />";
+                  var menu = "<a href=\"/html.html?id=4\" title=\"八卦\"><img src=\"/images/icon_Gossip32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+
+                  menu = menu + "<a href=\"/html.html?id=5\" title=\"源码\"><img src=\"/images/icon_code32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=6\" title=\"图片\"><img src=\"/images/icon_pic32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html/2011/147.html\" title=\"关于我\"><img src=\"/images/icon_me32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a> ";
+                  menu = menu + "<a href=\"/html/2011/149.html\" title=\"关于她\"><img src=\"/images/icon_she32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  document.getElementById("menubox").innerHTML = menu;
+                  break;
+              case "4":
+                  document.getElementById("menutitle").innerHTML = "<img src=\"/images/icon_Gossip.png\"  border=\"0\" />";
+                  var menu = "<a href=\"/html.html?id=3\" title=\"生活\"><img src=\"/images/icon_life32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+
+                  menu = menu + "<a href=\"/html.html?id=5\" title=\"源码\"><img src=\"/images/icon_code32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=6\" title=\"图片\"><img src=\"/images/icon_pic32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html/2011/147.html\" title=\"关于我\"><img src=\"/images/icon_me32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a> ";
+                  menu = menu + "<a href=\"/html/2011/149.html\" title=\"关于她\"><img src=\"/images/icon_she32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  document.getElementById("menu").innerHTML = menu;
+              case "5":
+                  document.getElementById("menutitle").innerHTML = "<img src=\"/images/icon_code.png\"  border=\"0\" />";
+                  var menu = "<a href=\"/html.html?id=3\" title=\"生活\"><img src=\"/images/icon_life32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+
+                  menu = menu + "<a href=\"/html.html?id=4\" title=\"八卦\"><img src=\"/images/icon_Gossip32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=6\" title=\"图片\"><img src=\"/images/icon_pic32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html/2011/147.html\" title=\"关于我\"><img src=\"/images/icon_me32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a> ";
+                  menu = menu + "<a href=\"/html/2011/149.html\" title=\"关于她\"><img src=\"/images/icon_she32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  document.getElementById("menubox").innerHTML = menu;
+              case "6":
+                  document.getElementById("menutitle").innerHTML = "<img src=\"/images/icon_pic.png\"  border=\"0\" />";
+                  var menu = "<a href=\"/html.html?id=3\" title=\"生活\"><img src=\"/images/icon_life32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+
+                  menu = menu + "<a href=\"/html.html?id=4\" title=\"八卦\"><img src=\"/images/icon_Gossip32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=5\" title=\"源码\"><img src=\"/images/icon_code32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html/2011/147.html\" title=\"关于我\"><img src=\"/images/icon_me32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a> ";
+                  menu = menu + "<a href=\"/html/2011/149.html\" title=\"关于她\"><img src=\"/images/icon_she32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  document.getElementById("menubox").innerHTML = menu;
+              default:
+                  var menu = "<a href=\"/html.html?id=3\" title=\"生活\"><img src=\"/images/icon_life32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+
+                  menu = menu + "<a href=\"/html.html?id=4\" title=\"八卦\"><img src=\"/images/icon_Gossip32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=5\" title=\"源码\"><img src=\"/images/icon_code32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html.html?id=6\" title=\"图片\"><img src=\"/images/icon_pic32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  menu = menu + "<a href=\"/html/2011/147.html\" title=\"关于我\"><img src=\"/images/icon_me32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a> ";
+                  menu = menu + "<a href=\"/html/2011/149.html\" title=\"关于她\"><img src=\"/images/icon_she32.png\" alt=\"\" border=\"0\" style=\"padding-left:20px;\" /></a>";
+                  document.getElementById("menubox").innerHTML = menu;
+          }
+      }
+</script>-->
+<table width='700' border='0' align='center' cellpadding='0' cellspacing='0' style='margin-top:40px;'>
+<tr>
+    <td align="left" id="menutitle">
+    </td>
+    <td id="menubox" style="text-align:right; padding-right:20px;">
+    </td>
+    <td style="text-align:right; width:68px;"><a href="/"><img src='/images/logo2.gif' border="0" /></a></td>
+</tr>
+</table>

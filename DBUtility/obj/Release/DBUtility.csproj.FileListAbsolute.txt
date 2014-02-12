@@ -1,0 +1,9 @@
+D:\MZ2\MZ2\DBUtility\bin\Release\DBUtility.dll
+D:\MZ2\MZ2\DBUtility\bin\Release\DBUtility.pdb
+D:\MZ2\MZ2\DBUtility\obj\Release\DBUtility.dll
+D:\MZ2\MZ2\DBUtility\obj\Release\DBUtility.pdb
+D:\Codes\MZ2\MZ2\DBUtility\bin\Release\DBUtility.dll
+D:\Codes\MZ2\MZ2\DBUtility\bin\Release\DBUtility.pdb
+D:\Codes\MZ2\MZ2\DBUtility\obj\Release\DBUtility.csprojResolveAssemblyReference.cache
+D:\Codes\MZ2\MZ2\DBUtility\obj\Release\DBUtility.dll
+D:\Codes\MZ2\MZ2\DBUtility\obj\Release\DBUtility.pdb

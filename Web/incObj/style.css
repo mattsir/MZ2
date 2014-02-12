@@ -1,0 +1,85 @@
+.animateTest {
+	text-align: center;
+	border-bottom:#e1e1e1 1px solid;
+	width: 240px;
+	color: #fff;
+	margin: 0 auto;
+	/*border-radius: 5px;  圆角矩形css*/
+	font-weight: bold;
+	
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: .2s;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-duration: 1s;
+	-moz-animation-delay: .2s;
+	-moz-animation-timing-function: ease;
+	-moz-animation-fill-mode: both;
+	-ms-animation-duration: 1s;
+	-ms-animation-delay: .2s;
+	-ms-animation-timing-function: ease;
+	-ms-animation-fill-mode: both;
+	-o-animation-duration: 1s;
+	-o-animation-delay: .2s;
+	-o-animation-timing-function: ease;
+	-o-animation-fill-mode: both;
+	}
+
+
+
+#animate1, #animate2, #animate3, #animate4 {
+	text-align:left;
+	border-bottom:#e1e1e1 1px solid;
+	width: 100%;
+	color: #fff;
+	margin: 0 auto;
+	/*border-radius: 5px;  圆角矩形css*/
+	/*font-weight: bold;*/
+	
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: .2s;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-duration: 1s;
+	-moz-animation-delay: .2s;
+	-moz-animation-timing-function: ease;
+	-moz-animation-fill-mode: both;
+	-ms-animation-duration: 1s;
+	-ms-animation-delay: .2s;
+	-ms-animation-timing-function: ease;
+	-ms-animation-fill-mode: both;
+	-o-animation-duration: 1s;
+	-o-animation-delay: .2s;
+	-o-animation-timing-function: ease;
+	-o-animation-fill-mode: both;
+	}
+#menutitle {
+	text-align:left;
+	width: 100%;
+	color: #fff;
+	margin: 0 auto;
+	/*border-radius: 5px;  圆角矩形css*/
+	/*font-weight: bold;*/
+	
+	-webkit-animation-duration: 1s;
+	-webkit-animation-delay: .2s;
+	-webkit-animation-timing-function: ease;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-duration: 1s;
+	-moz-animation-delay: .2s;
+	-moz-animation-timing-function: ease;
+	-moz-animation-fill-mode: both;
+	-ms-animation-duration: 1s;
+	-ms-animation-delay: .2s;
+	-ms-animation-timing-function: ease;
+	-ms-animation-fill-mode: both;
+	-o-animation-duration: 1s;
+	-o-animation-delay: .2s;
+	-o-animation-timing-function: ease;
+	-o-animation-fill-mode: both;
+	}
+/*#animate1 a, #animate2 a, #animate3 a, #animate4 a {
+    height: 32px;
+    line-height: 32px;
+    text-decoration: none;
+}*/
