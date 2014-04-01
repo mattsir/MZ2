@@ -27,7 +27,7 @@
                     ErrorMessage="请输入标题" ControlToValidate="title"></asp:RequiredFieldValidator>
             </td>
         </tr>
-        <tr>
+<%--        <tr>
             <td class="divh">
                 分类</td>
             <td>
@@ -36,7 +36,7 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                     ErrorMessage="请选择分类" ControlToValidate="board" Display="Dynamic"></asp:RequiredFieldValidator>
                 </td>
-        </tr>
+        </tr>--%>
         <tr>
             <td class="divh">
                 内容</td>
@@ -73,7 +73,7 @@
 <span class="fontred" id="editorspan"></span>
   </td>
         </tr>
-        <tr>
+<%--        <tr>
             <td class="divh">
                 简要</td>
             <td>
@@ -83,7 +83,7 @@
             <td class="divh" colspan="2">
                 <textarea id="summary" runat="server" class="textfield" cols="20" name="S1" rows="2" style="height:80px; width:85%;"></textarea> 
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="请填写简要" ControlToValidate="summary"></asp:RequiredFieldValidator></td>
-        </tr>
+        </tr>--%>
         <tr>
             <td class="divh">
                 封面</td>
@@ -108,7 +108,7 @@
                 <asp:DataList ID="taglist" CellPadding="0" CellSpacing="0" Width="100%" runat="server" 
                     RepeatDirection="Horizontal" RepeatLayout="Flow">
                 <ItemTemplate>
-                <div class="divfloat"><a href="javascript:void(0);" onclick=Setag('<%# Eval("tagname") %>')><%# Eval("tagname")%></a>&nbsp;&nbsp;</div>
+                <div class="divfloat"><a href="javascript:void(0);" onclick=Setag('<%# Eval("name") %>')><%# Eval("name")%></a>&nbsp;&nbsp;</div>
                 </ItemTemplate>
                 </asp:DataList>
                 </td>

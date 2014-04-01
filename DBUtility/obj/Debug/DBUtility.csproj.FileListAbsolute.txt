@@ -18,3 +18,8 @@ C:\Pro\MZ2\MZ2\DBUtility\bin\Debug\DBUtility.pdb
 C:\Pro\MZ2\MZ2\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache
 C:\Pro\MZ2\MZ2\DBUtility\obj\Debug\DBUtility.dll
 C:\Pro\MZ2\MZ2\DBUtility\obj\Debug\DBUtility.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\DBUtility\bin\Debug\DBUtility.dll
+\\vmware-host\Shared Folders\桌面\MZ2\DBUtility\bin\Debug\DBUtility.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\DBUtility\obj\Debug\DBUtility.dll
+\\vmware-host\Shared Folders\桌面\MZ2\DBUtility\obj\Debug\DBUtility.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\DBUtility\obj\Debug\DBUtility.csprojResolveAssemblyReference.cache

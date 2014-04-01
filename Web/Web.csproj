@@ -469,6 +469,7 @@
     <Content Include="incObj\mzblog.js" />
     <Content Include="incObj\smooth.js" />
     <Content Include="incObj\csshtml.css" />
+    <Content Include="index.aspx" />
     <Content Include="mzBoard\CategoryDelete.aspx" />
     <Content Include="mzBoard\CategoryUpdate.aspx" />
     <Content Include="mzBoard\ContentDelete.aspx" />
@@ -481,6 +482,7 @@
     <Content Include="mzBoard\SetHtml.aspx" />
     <Content Include="mzBoard\Tag.aspx" />
     <Content Include="mzBoard\TagSub.aspx" />
+    <Content Include="mzBoard\WebForm1.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -496,6 +498,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="mzBoard\CategoryDelete.aspx.cs">
       <DependentUpon>CategoryDelete.aspx</DependentUpon>
@@ -581,6 +590,13 @@
     <Compile Include="mzBoard\TagSub.aspx.designer.cs">
       <DependentUpon>TagSub.aspx</DependentUpon>
     </Compile>
+    <Compile Include="mzBoard\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mzBoard\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -597,7 +613,9 @@
     <Content Include="incObj\editor\net\fileUp.ashx" />
     <Content Include="incObj\editor\net\imageUp.ashx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="xml\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="incObj\editor\net\Web.config" />
   </ItemGroup>

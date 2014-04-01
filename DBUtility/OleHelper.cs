@@ -52,6 +52,22 @@ namespace DBUtility
             return Dt;
         }
 
+        public DataSet QueryDs(string sql)
+        {
+            //String strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=|DataDirectory|MZ.mdb";
+            myCon = new OleDbConnection(connString);
+            myCon.Open();
+            myCom = new OleDbCommand();
+            myCom.Connection = myCon;
+            myCom.CommandText = sql;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            adapter.SelectCommand = myCom;
+            DataSet ds = new DataSet();
+            adapter.Fill(ds, "Blog");
+            Close();
+            return ds;
+        }
+
         public DataTable Query(string sql, int CurrentPage, int PageItem, string tablename)
         {
             myCon = new OleDbConnection(connString);

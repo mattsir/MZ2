@@ -6,6 +6,7 @@ using DBUtility;
 using System.Data.OleDb;
 using System.Web;
 using System.IO;
+using System.Xml;
 
 namespace BLL
 {
@@ -48,6 +49,18 @@ namespace BLL
             { boardstring = " And boardid=" + id; }
             string sql = "SELECT *,(Select boardname From mz_board Where mz_board.id=mz_Content.boardid) As boardname  From mz_Content Where flag=false " + boardstring + " Order by addtime desc";
             return obj.Query(sql, CurrentPage, PageItem, "mz_Content");
+        }
+
+        public DataTable ContentPage(int CurrentPage, int PageItem, int id, string desc)
+        {
+            string sql = "SELECT Title,Cover,Addtime From mz_Content Where flag=false Order by addtime";
+            return obj.Query(sql);
+        }
+
+        public DataSet ContentPageds()
+        {
+            string sql = "SELECT Title,Cover,Addtime From mz_Content Where flag=false Order by addtime";
+            return obj.QueryDs(sql);
         }
         #endregion
 
@@ -130,131 +143,280 @@ namespace BLL
         /// <param name="content"></param>
         public void ContentUpdate(sModal.sContent content)
         {
-            string id;
-            if (content.id == 0)
-            {
-                string sql = "Insert Into mz_Content (title,boardid,content,summary,tags,cover)" +
-                    " Values('" + content.title + "'," + content.boardid + ",'" + content.content + "','" + content.summary + "','" + content.tags + "','" + content.cover + "')";
-                obj.Execute(sql);
-                string idsql = "Select top 1 id From mz_Content Order by id desc";
-                DataTable dt = obj.Query(idsql);
-                id = dt.Rows[0]["id"].ToString();
-            }
-            else
-            {
-                string sql = "Update mz_Content Set title='" + content.title + "',boardid=" + content.boardid + ",content='" + content.content + "',summary='" + content.summary + "',tags='" + content.tags + "',cover='" + content.cover + "' where id=" + content.id;
-                obj.Execute(sql);
-                id = content.id.ToString();
-            }
-
-
-            string filepublic = "../html/";
-            string filepath = DateTime.Parse(content.addtime).Year.ToString();
-            if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(filepublic + filepath)))
-            {
-                System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(filepublic + filepath));
-            }
-
-            StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath(filepublic + "Templete/HTMLPage.html"));
-
-            StringBuilder htmltext = new StringBuilder(sr.ReadToEnd());
-            htmltext.Replace("htmltitle", content.title);
-            htmltext.Replace("htmltime", content.addtime.ToString());
-            htmltext.Replace("htmltext", content.content).Replace("../attached/", "/attached/");
-            htmltext.Replace("htmlsummary", content.summary);
-            //htmltext.Replace("boardid", content.boardid.ToString());
-
-            StreamWriter sw = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(filepublic + filepath + "/" + id + ".html"), false, System.Text.Encoding.GetEncoding("utf-8"));
-            sw.WriteLine(htmltext);
-            sw.Flush();
-            sw.Close();
+            //string id;
+            //if (content.id == 0)
+            //{
+            //    string sql = "Insert Into mz_Content (title,boardid,content,summary,tags,cover)" +
+            //        " Values('" + content.title + "'," + content.boardid + ",'" + content.content + "','" + content.summary + "','" + content.tags + "','" + content.cover + "')";
+            //    obj.Execute(sql);
+            //    //string idsql = "Select top 1 id From mz_Content Order by id desc";
+            //    //DataTable dt = obj.Query(idsql);
+            //    //id = dt.Rows[0]["id"].ToString();
+            //}
+            //else
+            //{
+            //    string sql = "Update mz_Content Set title='" + content.title + "',boardid=" + content.boardid + ",content='" + content.content + "',summary='" + content.summary + "',tags='" + content.tags + "',cover='" + content.cover + "' where id=" + content.id;
+            //    obj.Execute(sql);
+            //    id = content.id.ToString();
+            //}
+            CreateXml(content);
+            UpdateXmlList(content);
         }
 
-        public bool CreateHtml()
+        /// <summary>
+        /// 更新list xml
+        /// </summary>
+        /// <param name="content"></param>
+        public void UpdateXmlList(sModal.sContent content)
         {
-            string sql = "Select *,(Select boardname from mz_board where id=mz_Content.boardid) as boardname from mz_Content where flag=0";
-            DataTable dt = obj.Query(sql);
-            if (dt.Rows.Count > 0)
+            //DataTable dt = ContentPage(1, 200, 0);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(System.Web.HttpContext.Current.Server.MapPath("../xml/list.xml"));
+
+            //string filename = dt.Rows[i]["addtime"].ToString().Replace("-", "").Replace("/", "").Replace(":", "").Replace(" ", "");
+            //XmlNode root = xmlDoc.SelectSingleNode("Blogs");//查找<bookstore>   
+            //XmlElement xe1 = xmlDoc.CreateElement("Blog");//创建一个<book>节点    
+            //xe1.SetAttribute("file", filename);
+
+            //XmlElement xesub1 = xmlDoc.CreateElement("Title");
+            //xesub1.InnerText = dt.Rows[i]["title"].ToString();//设置文本节点   
+            //xe1.AppendChild(xesub1);//添加到<book>节点中   
+            //XmlElement xesub2 = xmlDoc.CreateElement("Cover");
+            //xesub2.InnerText = dt.Rows[i]["cover"].ToString();
+            //xe1.AppendChild(xesub2);
+            //XmlElement xesub3 = xmlDoc.CreateElement("Addtime");
+            //xesub3.InnerText = dt.Rows[i]["addtime"].ToString(); ;
+            //xe1.AppendChild(xesub3);
+
+            //root.AppendChild(xe1);//添加到<bookstore>节点中   
+
+            string filename = content.addtime.Replace("-", "").Replace("/", "").Replace(":", "").Replace(" ", "");
+            XmlNode root = xmlDoc.SelectSingleNode("Blogs");//查找<bookstore>   
+            XmlElement xe1 = xmlDoc.CreateElement("Blog");//创建一个<book>节点    
+            xe1.SetAttribute("file", filename);
+
+            XmlElement xesub1 = xmlDoc.CreateElement("Title");
+            xesub1.InnerText = content.title;//设置文本节点   
+            xe1.AppendChild(xesub1);//添加到<book>节点中   
+            XmlElement xesub2 = xmlDoc.CreateElement("Cover");
+            xesub2.InnerText = content.cover;
+            xe1.AppendChild(xesub2);
+            XmlElement xesub3 = xmlDoc.CreateElement("Addtime");
+            xesub3.InnerText = content.addtime;
+            xe1.AppendChild(xesub3);
+
+            root.AppendChild(xe1);//添加到<bookstore>节点中   
+
+            xmlDoc.Save(System.Web.HttpContext.Current.Server.MapPath("../xml/list.xml"));
+
+        }
+
+        #region 生成 详情xml
+        /// <summary>
+        /// 生成 详情xml
+        /// </summary>
+        /// <param name="content"></param>
+        public void CreateXml(sModal.sContent content)
+        {
+            string filename = content.addtime.Replace("-", "").Replace("/", "").Replace(":", "").Replace(" ", "");
+            XmlDocument xmldoc;
+            //XmlNode xmlnode;
+            XmlElement xmlelem;
+            xmldoc = new XmlDocument();
+            //加入XML的声明段落,<?xml version="1.0" encoding="gb2312"?>  
+            XmlDeclaration xmldecl;
+            xmldecl = xmldoc.CreateXmlDeclaration("1.0", "utf-8", null);
+            xmldoc.AppendChild(xmldecl);
+            //加入一个根元素  
+            xmlelem = xmldoc.CreateElement("", "Blog", "");
+            xmldoc.AppendChild(xmlelem);
+            //加入另外一个元素  
+
+            XmlNode root = xmldoc.SelectSingleNode("Blog");//查找<Employees>  
+            XmlElement xe1 = xmldoc.CreateElement("Article");//创建一个<Node>节点  
+            //xe1.SetAttribute("genre", "李赞红");//设置该节点genre属性  
+            //xe1.SetAttribute("ISBN", "2-3631-4");//设置该节点ISBN属性  
+            XmlElement xesub1 = xmldoc.CreateElement("Title");
+            xesub1.InnerText = content.title;//设置文本节点  
+            xe1.AppendChild(xesub1);//添加到<Node>节点中  
+            XmlElement xesub2 = xmldoc.CreateElement("Datetime");
+            xesub2.InnerText = content.addtime;
+            xe1.AppendChild(xesub2);
+            XmlElement xesub3 = xmldoc.CreateElement("Content");
+            xesub3.InnerText = Escape(content.content);
+            xe1.AppendChild(xesub3);
+            XmlElement xesub4 = xmldoc.CreateElement("Tags");
+            xesub4.InnerText = content.tags;
+            xe1.AppendChild(xesub4);
+            XmlElement xesub5 = xmldoc.CreateElement("Filename");
+            xesub5.InnerText = filename;
+            xe1.AppendChild(xesub5);
+
+            XmlElement xesub6 = xmldoc.CreateElement("Cover");
+            xesub6.InnerText = content.cover;
+            xe1.AppendChild(xesub6);
+
+            XmlElement xesub7 = xmldoc.CreateElement("Tag");
+            xesub7.InnerText = content.cover;
+            xe1.AppendChild(xesub7);
+
+            root.AppendChild(xe1);//添加到<Employees>节点中  
+
+            //保存创建好的XML文档  
+            //xmldoc.Save("data.xml");
+            xmldoc.Save(System.Web.HttpContext.Current.Server.MapPath("../xml/" + filename + ".xml"));
+        }
+        #endregion
+
+        /// <summary>
+        /// Access to Xml List
+        /// </summary>
+        public bool AccessToXml()
+        {
+            try
             {
-                string filepublic = "../html/";
+                DataTable dt = ContentPage(1, 1, 1, "");
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(System.Web.HttpContext.Current.Server.MapPath("../xml/list.xml"));
+                XmlNode root = xmlDoc.SelectSingleNode("Blogs");//查找<bookstore>  
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    string filepath = DateTime.Parse(dt.Rows[i]["addtime"].ToString()).Year.ToString();
-                    if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(filepublic + filepath)))
-                    {
-                        System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(filepublic + filepath));
-                    }
+                    string filename = dt.Rows[i]["addtime"].ToString().Replace("-", "").Replace("/", "").Replace(":", "").Replace(" ", "");
 
-                    StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath(filepublic + "Templete/HTMLPage.html"));
+                    XmlElement xe1 = xmlDoc.CreateElement("Blog");//创建一个<book>节点    
+                    xe1.SetAttribute("file", filename);
 
-                    StringBuilder htmltext = new StringBuilder(sr.ReadToEnd());
+                    XmlElement xesub1 = xmlDoc.CreateElement("Title");
+                    xesub1.InnerText = dt.Rows[i]["title"].ToString();//设置文本节点   
+                    xe1.AppendChild(xesub1);//添加到<book>节点中   
+                    XmlElement xesub2 = xmlDoc.CreateElement("Cover");
+                    xesub2.InnerText = dt.Rows[i]["cover"].ToString();
+                    xe1.AppendChild(xesub2);
+                    XmlElement xesub3 = xmlDoc.CreateElement("Addtime");
+                    xesub3.InnerText = dt.Rows[i]["addtime"].ToString();
+                    xe1.AppendChild(xesub3);
 
-                    htmltext.Replace("htmltitle", dt.Rows[i]["title"].ToString());
-                    htmltext.Replace("htmltime", dt.Rows[i]["addtime"].ToString());
-                    htmltext.Replace("htmlboard", dt.Rows[i]["boardname"].ToString());
-                    htmltext.Replace("htmltext", dt.Rows[i]["content"].ToString().Replace("../attached/", "/attached/"));
-                    htmltext.Replace("htmlid", dt.Rows[i]["id"].ToString());
-                    htmltext.Replace("boardid", dt.Rows[i]["boardid"].ToString());
-
-                    StreamWriter sw = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(filepublic + filepath + "/" + dt.Rows[i]["id"].ToString() + ".html"), false, System.Text.Encoding.GetEncoding("utf-8"));
-                    sw.WriteLine(htmltext);
-                    sw.Flush();
-                    sw.Close();
+                    root.AppendChild(xe1);//添加到<bookstore>节点中   
                 }
+                xmlDoc.Save(System.Web.HttpContext.Current.Server.MapPath("../xml/list.xml"));
                 return true;
             }
-            else
+            catch
             {
                 return false;
             }
         }
 
-        public void CreateDefault()
+
+
+        public string Escape(string str)
         {
-            //string sql = "Select *,(Select boardname from mz_board where id=mz_Content.boardid) as boardname from mz_Content where flag=0";
-            string sql = "Select * From mz_board";
-            DataTable dt = obj.Query(sql);
-
-            StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath( "/html/Templete/default.html"));
-
-            StringBuilder htmltext = new StringBuilder(sr.ReadToEnd());
-            StringBuilder sp = new StringBuilder();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    string boardid=dt.Rows[i]["id"].ToString();
-                    string boardname = dt.Rows[i]["boardname"].ToString();
-                    string sql2 = "Select top 1 * from mz_content where boardid=" + boardid+" Order by addtime desc";
-                    DataTable dt2 = obj.Query(sql2);
-                    int clo = i + 1;
-                    sp.Append(" <div id=\"animate" + clo + "\" class=\"\">");
-                    sp.Append("<img src=\"images/icon_channel" + clo + ".png\" border=\"0\" align=\"absmiddle\" /> <a href=\"html.html?id=" + boardid + "\">" + boardname + "</a></div>");
-                    sp.Append("<div id=\"animateBox" + i + "\"></div>");
-
-                    DateTime times = DateTime.Parse(dt2.Rows[0]["addtime"].ToString());
-                    string dates = string.Format("{0:MM-dd}", times);
-
-                    sp.Append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"margin-top:10px; margin-bottom:10px;\"><tr>");
-                    sp.Append("<td class=\"fontgary\" style=\"padding-right:10px;text-align:left; vertical-align:top;\">");
-                    sp.Append("<div class=\"div\">[" + dates + "] <a href=\"html/" + times.Year + "/" + dt2.Rows[0]["id"].ToString() + ".html\">" + dt2.Rows[0]["title"].ToString() + "</a></div>");
-                    sp.Append("<span class=\"fontgary\">" + dt2.Rows[0]["summary"].ToString() + "</span></td>");
-                    sp.Append("<td style=\"width:125px; vertical-align:top;text-align:left;\"><img src=\"attached/" + dt2.Rows[0]["cover"].ToString() + "\" style=\"border:#ffffff 3px solid;\" /></td>");
-                    sp.Append("</tr></table>");
-
-                    //htmltext.Replace("htmltitle", dt.Rows[i]["title"].ToString());
-                    //htmltext.Replace("htmltime", dt.Rows[i]["addtime"].ToString());
-                    //htmltext.Replace("htmlboard", dt.Rows[i]["boardname"].ToString());
-                    //htmltext.Replace("htmltext", dt.Rows[i]["content"].ToString().Replace("../attached/", "/attached/"));
-                    //htmltext.Replace("htmlid", dt.Rows[i]["id"].ToString());
-                    //htmltext.Replace("boardid", dt.Rows[i]["boardid"].ToString());
-                }
-
-            htmltext.Replace("defaulthtml", sp.ToString());
-            StreamWriter sw = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath("/default.html"), false, System.Text.Encoding.GetEncoding("utf-8"));
-            sw.WriteLine(htmltext);
-            sw.Flush();
-            sw.Close();
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                sb.Append((Char.IsLetterOrDigit(c)
+                || c == '-' || c == '_' || c == '\\'
+                || c == '/' || c == '.') ? c.ToString() : Uri.HexEscape(c));
+            }
+            return sb.ToString();
         }
+
+        public string UnEscape(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            int len = str.Length;
+            int i = 0;
+            while (i != len)
+            {
+                if (Uri.IsHexEncoding(str, i))
+                    sb.Append(Uri.HexUnescape(str, ref i));
+                else
+                    sb.Append(str[i++]);
+            }
+            return sb.ToString();
+        } 
+
+        //public bool CreateHtml()
+        //{
+        //    string sql = "Select *,(Select boardname from mz_board where id=mz_Content.boardid) as boardname from mz_Content where flag=0";
+        //    DataTable dt = obj.Query(sql);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        string filepublic = "../html/";
+        //        for (int i = 0; i < dt.Rows.Count; i++)
+        //        {
+        //            string filepath = DateTime.Parse(dt.Rows[i]["addtime"].ToString()).Year.ToString();
+        //            if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(filepublic + filepath)))
+        //            {
+        //                System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(filepublic + filepath));
+        //            }
+
+        //            StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath(filepublic + "Templete/HTMLPage.html"));
+
+        //            StringBuilder htmltext = new StringBuilder(sr.ReadToEnd());
+
+        //            htmltext.Replace("htmltitle", dt.Rows[i]["title"].ToString());
+        //            htmltext.Replace("htmltime", dt.Rows[i]["addtime"].ToString());
+        //            htmltext.Replace("htmlboard", dt.Rows[i]["boardname"].ToString());
+        //            htmltext.Replace("htmltext", dt.Rows[i]["content"].ToString().Replace("../attached/", "/attached/"));
+        //            htmltext.Replace("htmlid", dt.Rows[i]["id"].ToString());
+        //            htmltext.Replace("boardid", dt.Rows[i]["boardid"].ToString());
+
+        //            StreamWriter sw = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(filepublic + filepath + "/" + dt.Rows[i]["id"].ToString() + ".html"), false, System.Text.Encoding.GetEncoding("utf-8"));
+        //            sw.WriteLine(htmltext);
+        //            sw.Flush();
+        //            sw.Close();
+        //        }
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public DataSet CXmlFileToDataSet(string xmlFilePath)
+        {
+            if (!string.IsNullOrEmpty(xmlFilePath))
+            {
+                string path = HttpContext.Current.Server.MapPath(xmlFilePath);
+                StringReader StrStream = null;
+                XmlTextReader Xmlrdr = null;
+                try
+                {
+                    XmlDocument xmldoc = new XmlDocument();
+                    //根据地址加载Xml文件  
+                    xmldoc.Load(path);
+
+                    DataSet ds = new DataSet();
+                    //读取文件中的字符流  
+                    StrStream = new StringReader(xmldoc.InnerXml);
+                    //获取StrStream中的数据  
+                    Xmlrdr = new XmlTextReader(StrStream);
+                    //ds获取Xmlrdr中的数据  
+                    ds.ReadXml(Xmlrdr);
+                    return ds;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    //释放资源  
+                    if (Xmlrdr != null)
+                    {
+                        Xmlrdr.Close();
+                        StrStream.Close();
+                        StrStream.Dispose();
+                    }
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }  
 
         public void ContentDelete(string id, string path)
         {
@@ -265,10 +427,33 @@ namespace BLL
             if (fileM.Exists) { fileM.Delete(); } //删除单个文件
         }
 
-        public DataTable GetTags()
+        public DataTable GetTags(string xmlFilePath)
         {
-            string sql = "Select * From mz_Tags";
-            return obj.Query(sql);
+            //string sql = "Select * From mz_Tags";
+            //return obj.Query(sql);
+
+            string path = HttpContext.Current.Server.MapPath(xmlFilePath);
+            StringReader StrStream = null;
+            XmlTextReader Xmlrdr = null;
+            try
+            {
+                XmlDocument xmldoc = new XmlDocument();
+                //根据地址加载Xml文件  
+                xmldoc.Load(path);
+
+                DataSet ds = new DataSet();
+                //读取文件中的字符流  
+                StrStream = new StringReader(xmldoc.InnerXml);
+                //获取StrStream中的数据  
+                Xmlrdr = new XmlTextReader(StrStream);
+                //ds获取Xmlrdr中的数据  
+                ds.ReadXml(Xmlrdr);
+                return ds.Tables[0];
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>

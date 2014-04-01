@@ -15,9 +15,13 @@
                 <table cellpadding="0" cellspacing="0" width="990" style="margin-top: 15px;">
                     <tr>
                         <td>
-                            <img src="../images/marsz.gif" alt="" />
+                            <a href="/" target="_blank"><img src="../images/marsz.gif" alt="" border="0" /></a>
                         </td>
-                        <td style="text-align:right;"><a href="ContentList.aspx?id=0">文章列表</a> <a href="Insert.aspx">添加文章</a> <a href="SetHtml.aspx">生成html文件</a> <a href="Tag.aspx">Tags</a></td>
+                        <td style="text-align:right;"><a href="ContentList.aspx?id=0">文章列表</a> <a href="Insert.aspx">添加文章</a> <a href="SetHtml.aspx">生成html文件</a> 
+                            <a href="SetHtml.aspx">AccesstoXml</a> 
+                            <a href="Tag.aspx">Tags</a> 
+
+                        </td>
                     </tr>
                 </table>
                 <table cellpadding="0" cellspacing="0" width="990" style="margin-top: 15px; border: #D9D9D9 1px solid;">

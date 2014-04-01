@@ -52,3 +52,12 @@ C:\Pro\MZ2\MZ2\Web\bin\DBUtility.pdb
 C:\Pro\MZ2\MZ2\Web\obj\Debug\Web.dll
 C:\Pro\MZ2\MZ2\Web\obj\Debug\Web.pdb
 C:\Pro\MZ2\MZ2\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\Web.dll
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\Web.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\BLL.dll
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\DBUtility.dll
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\BLL.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\Web\bin\DBUtility.pdb
+\\vmware-host\Shared Folders\桌面\MZ2\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\桌面\MZ2\Web\obj\Debug\Web.dll
+\\vmware-host\Shared Folders\桌面\MZ2\Web\obj\Debug\Web.pdb

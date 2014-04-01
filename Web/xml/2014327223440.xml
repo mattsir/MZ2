@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Blog>
+  <Article>
+    <Title>123</Title>
+    <Datetime>2014/3/27 22:34:40</Datetime>
+    <Content>%3Cp%3E123%3Cbr%20/%3E%3C/p%3E</Content>
+    <Tags>生活,</Tags>
+    <Filename>2014327223440</Filename>
+    <Cover>123</Cover>
+    <Tag>123</Tag>
+  </Article>
+</Blog>

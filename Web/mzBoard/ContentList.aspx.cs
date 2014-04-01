@@ -17,42 +17,58 @@ namespace Web.mzBoard
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["id"] == null)
-                {
-                    alert.Attributes["style"] = "display:block;";
-                }
-                else
-                {
-                    if (int.TryParse(Request.QueryString["id"].ToString(), out id))
-                    {
-                        int totalOrders = (int)content.ContentTotal(id);
-                        number.Text = totalOrders.ToString();
-                        AspNetPager1.RecordCount = totalOrders;
-                        bindData();
-                        bindCate();
-                    }
-                    else
-                    {
-                        alert.Attributes["style"] = "display:block;";
-                    }
-                }
+
+                int totalOrders = (int)content.ContentTotal(0);
+                number.Text = totalOrders.ToString();
+                AspNetPager1.RecordCount = totalOrders;
+                //bindData();
+                bindCate();
             }
         }
 
         public void bindCate()
         {
-            DataTable dt = content.GetCategory();
-            DataRow row = dt.NewRow();
-            row["id"] = "0";
-            row["boardname"] = "全部";
-            dt.Rows.Add(row);
+            DataSet ds = content.CXmlFileToDataSet("../xml/list.xml");
+            //Response.Write(ds.Tables[0].Rows.Count);
+            //DataTable dt = content.GetCategory();
+            //DataRow row = dt.NewRow();
+            //row["id"] = "0";
+            //row["boardname"] = "全部";
+            //dt.Rows.Add(row);
+
             //datatable 编辑行
             //row.BeginEdit();
             //row["id"] = "0";
             //row["boardname"] = "全部";
             //row.EndEdit();
-            DataList2.DataSource = dt;
-            DataList2.DataBind();
+
+            int pageitem = 15;
+            int page;
+            if (Request.QueryString["page"] == null)
+            {
+                page = 1;
+            }
+            else
+            {
+                if (int.TryParse(Request.QueryString["page"].ToString(), out page))
+                {
+                    page = page;
+                }
+                else
+                {
+                    page = 1;
+                }
+            }
+
+            PagedDataSource pds = new PagedDataSource();
+            pds.AllowPaging = true;
+            pds.DataSource = ds.Tables[0].DefaultView;
+            pds.AllowPaging = true;
+            pds.PageSize = pageitem;
+            pds.CurrentPageIndex = page;
+            Repeater1.DataSource = pds;
+            Repeater1.DataBind();  
+            
         }
 
         public void bindData()

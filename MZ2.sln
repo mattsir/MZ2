@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{2
 		{DEAB343E-EE30-4666-8BFE-2170569FFF0E} = {DEAB343E-EE30-4666-8BFE-2170569FFF0E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo", "Mongo\Mongo.csproj", "{02D145BD-337F-4F7A-AA4F-44F4669FF85B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoWeb", "MongoWeb\MongoWeb.csproj", "{8F44A7E6-1D6F-405C-AA21-3E4E02C3B67F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,14 +31,6 @@ Global
 		{23477F75-C991-4825-9F50-C72A95F8ECC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23477F75-C991-4825-9F50-C72A95F8ECC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23477F75-C991-4825-9F50-C72A95F8ECC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02D145BD-337F-4F7A-AA4F-44F4669FF85B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02D145BD-337F-4F7A-AA4F-44F4669FF85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02D145BD-337F-4F7A-AA4F-44F4669FF85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02D145BD-337F-4F7A-AA4F-44F4669FF85B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F44A7E6-1D6F-405C-AA21-3E4E02C3B67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F44A7E6-1D6F-405C-AA21-3E4E02C3B67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F44A7E6-1D6F-405C-AA21-3E4E02C3B67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F44A7E6-1D6F-405C-AA21-3E4E02C3B67F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

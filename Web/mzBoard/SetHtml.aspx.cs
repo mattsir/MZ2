@@ -14,18 +14,32 @@ namespace Web.mzBoard
         {
         }
 
+        ContentObj obj = new ContentObj();
         protected void Button1_Click(object sender, EventArgs e)
         {
-            ContentObj obj = new ContentObj();
-            if (obj.CreateHtml())
+            
+            //if (obj.CreateHtml())
+            //{
+            //    txt.InnerHtml = "html文件生成成功";
+            //}
+            //else
+            //{
+            //    txt.InnerHtml = "html文件生成不成功";
+            //}
+            //Button1.Visible = false;
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            if (obj.AccessToXml())
             {
-                txt.InnerHtml = "html文件生成成功";
+                txt2.InnerHtml = "Xml List文件生成成功";
             }
             else
             {
-                txt.InnerHtml = "html文件生成不成功";
+                txt2.InnerHtml = "Xml List文件生成不成功";
             }
-            Button1.Visible = false;
+            Button2.Visible = false;
         }
     }
 }

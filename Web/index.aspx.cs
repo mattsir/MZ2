@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 
-namespace Web.mzBoard
+namespace Web
 {
-    public partial class SetDefault : System.Web.UI.Page
+    public partial class index : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ContentObj obj = new ContentObj();
-                obj.CreateDefault();
-                inner.InnerHtml="首页生成成功";
+                ContentObj content = new ContentObj();
+                DataTable dt = content.ContentPage(1, 100, 0);
+
+                Repeater1.DataSource = dt;
+                Repeater1.DataBind();
             }
         }
-
     }
 }

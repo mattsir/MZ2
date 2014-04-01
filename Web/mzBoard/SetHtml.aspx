@@ -4,4 +4,8 @@
     
     <asp:Button ID="Button1" runat="server" Text="生成html" OnClick="Button1_Click" />
     <div class="divh" runat="server" id="txt"></div>
+    <asp:Button ID="Button2" runat="server" Text="AccrsstoXml" OnClick="Button2_Click" />
+    <div class="divh" runat="server" id="txt2">
+        
+    </div>
 </asp:Content>

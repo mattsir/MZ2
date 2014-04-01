@@ -15,6 +15,7 @@ namespace Web.mzBoard
             if (!IsPostBack)
             {
                 ContentObj obj = new ContentObj();
+
                 if (obj.CheckAdmin())
                 {
 

@@ -27,9 +27,7 @@
     <asp:DataList ID="DataList1" runat="server" RepeatLayout="Flow" CellPadding="0" CellSpacing="0" 
         Width="100%" RepeatDirection="Horizontal">
     <ItemTemplate>
-        <span style="border: solid 1px #B2D9F0; margin-right:5px; padding-left:5px;"><%# Eval("tagname") %>
-            <a href="TagSub.aspx?id=<%# Eval("id") %>">X</a>
-        </span>
+        <%# Eval("name") %>
     </ItemTemplate>
     <ItemStyle Height="35px" />
     </asp:DataList>

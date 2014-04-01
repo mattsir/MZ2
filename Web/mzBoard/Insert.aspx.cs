@@ -32,12 +32,12 @@ namespace Web.mzBoard
         ContentObj obj = new ContentObj();
         public void bind()
         {
-            board.DataSource = obj.GetCategory();
-            board.DataTextField = "boardname";
-            board.DataValueField = "id";
-            board.DataBind();
+            //board.DataSource = obj.GetCategory();
+            //board.DataTextField = "boardname";
+            //board.DataValueField = "id";
+            //board.DataBind();
 
-            taglist.DataSource = obj.GetTags();
+            taglist.DataSource = obj.GetTags("../xml/board.xml");
             taglist.DataBind();
         }
 
@@ -67,8 +67,6 @@ namespace Web.mzBoard
             //{
             //}
             title.Value = content.title;
-            board.SelectedValue = content.boardid.ToString();
-            summary.Value = content.summary;
             cover.Value = content.cover;
             tags.Value = content.tags;
             id.Text = content.id.ToString();
@@ -80,15 +78,13 @@ namespace Web.mzBoard
             sModal.sContent content = new sModal.sContent();
             content.id = Convert.ToInt32(this.id.Text);
             content.title = this.title.Value;
-            content.boardid = Convert.ToInt32(board.SelectedValue);
             content.content = Request.Form["editorValue"].ToString();
-            content.summary = summary.Value;
             content.cover = cover.Value;
             content.tags = tags.Value;
             content.addtime = addtime.Text;
             ContentObj obj = new ContentObj();
             obj.ContentUpdate(content);
-            Response.Redirect("ContentList.aspx?id=" + board.SelectedValue);
+            Response.Redirect("ContentList.aspx");
         }
     }
 }

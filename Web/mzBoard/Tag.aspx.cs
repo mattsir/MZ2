@@ -20,8 +20,8 @@ namespace Web.mzBoard
         ContentObj obj = new ContentObj();
         public void bind()
         {
-            DataTable dt = obj.GetTags();
-            DataList1.DataSource = obj.GetTags();
+            DataTable dt = obj.GetTags("../xml/board.xml");
+            DataList1.DataSource = dt;
             DataList1.DataBind();
         }
     }
